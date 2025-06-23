@@ -1,0 +1,43 @@
+{
+  "name": "pg-anon",
+  "version": "1.0.0",
+  "description": "CLI to anonymize PostgreSQL data using Faker.js or Falso",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "tsc --watch"
+  },
+  "keywords": [
+    "postgres",
+    "faker.js",
+    "falso",
+    "anonymize",
+    "anonymization"
+  ],
+  "author": "Karl von Randow",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cactuslab/pg-anon.git"
+  },
+  "homepage": "https://github.com/cactuslab/pg-anon#readme",
+  "dependencies": {
+    "@faker-js/faker": "^9.8.0",
+    "@ngneat/falso": "^7.4.0",
+    "pg": "^8.16.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.29.0",
+    "@stylistic/eslint-plugin": "^4.4.1",
+    "@types/pg": "^8.15.4",
+    "eslint": "^9.29.0",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.34.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -1,0 +1,8 @@
+/.gitignore
+/.nvmrc
+/.vscode
+/*.config.js
+/src
+/tsconfig.json
+/pnpm-lock.yaml
+/*.tgz
