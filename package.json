@@ -1,6 +1,6 @@
 {
   "name": "pg-anon",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "CLI to anonymize PostgreSQL data using Faker.js or Falso",
   "type": "module",
   "main": "dist/index.js",
