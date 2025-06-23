@@ -8,21 +8,27 @@ import { Client, QueryResult } from 'pg'
 import { PgAnonConfig } from './types.js'
 export * from './types.js'
 
-const DEFAULT_CONFIG_FILE_NAME = 'pg-anon.config.js'
-const configFileName = process.argv[2] || DEFAULT_CONFIG_FILE_NAME
-const configPath = path.resolve(process.cwd(), configFileName)
-const config: PgAnonConfig = fs.existsSync(configPath) ? await import(configPath).then(mod => mod.default || mod) : null
+const DEFAULT_CONFIG_FILE_NAMES = ['pg-anon.config.mjs', 'pg-anon.config.js']
 
-if (!config) {
-	console.error('Missing configuration in pg-anon.config.js')
+const [configFileName, config] = await resolveConfigFile(DEFAULT_CONFIG_FILE_NAMES)
+
+async function resolveConfigFile(configFileNames: string[]): Promise<[string, PgAnonConfig]> {
+	for (const configFileName of configFileNames) {
+		const configPath = path.resolve(process.cwd(), configFileName)
+		if (fs.existsSync(configPath)) {
+			return [configFileName, await import(configPath).then(mod => mod.default || mod)]
+		}
+	}
+	console.error(`Missing configuration in ${configFileName}`)
 	process.exit(1)
 }
+
 if (!config.connectionString) {
-	console.error('Missing connectionString in pg-anon.config.js')
+	console.error(`Missing connectionString in ${configFileName}`)
 	process.exit(1)
 }
 if (!Array.isArray(config.tables)) {
-	console.error('Missing tables array in pg-anon.config.js')
+	console.error(`Missing tables array in ${configFileName}`)
 	process.exit(1)
 }
 
